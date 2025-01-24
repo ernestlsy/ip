@@ -18,11 +18,17 @@ public class TaskList {
         return out.toString();
     }
 
-    protected String markTask(int idx) {
+    protected String markTask(int idx) throws PixelException {
+        if (idx <= 0 || idx >= this.count || this.contents[idx] == null) {
+            throw new PixelException("Please input a valid task number!");
+        }
         this.contents[idx].markTask();
         return "Excellent, I've marked this task as done:\n  " + this.contents[idx];
     }
-    protected String unmarkTask(int idx) {
+    protected String unmarkTask(int idx) throws PixelException {
+        if (idx <= 0 || idx >= this.count || this.contents[idx] == null) {
+            throw new PixelException("Please input a valid task number!");
+        }
         this.contents[idx].unmarkTask();
         return "Alright, I've marked this task as not done yet:\n  " + this.contents[idx];
     }

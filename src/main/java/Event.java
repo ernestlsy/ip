@@ -1,7 +1,7 @@
 public class Event extends Task {
     String from;
     String to;
-    private static String[] format(String[] comp) {
+    private static String[] format(String[] comp) throws PixelException {
         int idx = 1;
         StringBuilder desc = new StringBuilder();
         StringBuilder from = new StringBuilder();
@@ -28,6 +28,13 @@ public class Event extends Task {
             to.append(comp[idx]).append(" ");
             idx++;
         }
+        if (desc.toString().isEmpty()) {
+            throw new PixelException("Please include a description for the Event!");
+        } else if (from.toString().isEmpty()) {
+            throw new PixelException("Please set a starting date/time using '/from' followed by a date/time!");
+        } else if (to.toString().isEmpty()) {
+            throw new PixelException("Please set a ending date/time using '/to' followed by a date/time!");
+        }
         return new String[] {desc.toString().strip(), from.toString().strip(), to.toString().strip()};
     }
     public Event(String desc, String from, String to) {
@@ -35,7 +42,7 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
     }
-    public Event(String[] comp) {
+    public Event(String[] comp) throws PixelException {
         super(Event.format(comp)[0]);
         String[] temp = Event.format(comp);
         this.from = temp[1];

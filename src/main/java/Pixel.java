@@ -20,34 +20,38 @@ public class Pixel {
             }
             String[] parts = input.split("\\s+");
             String keyword = parts[0];
-            switch (keyword) {
-                case "mark":
-                    wrapPrint(tasklist.markTask(Integer.parseInt(parts[1]) - 1));
-                    continue;
-                case "unmark":
-                    wrapPrint(tasklist.unmarkTask(Integer.parseInt(parts[1]) - 1));
-                    continue;
-                case "todo":
-                    wrapPrint(tasklist.addTask(new ToDo(parts)));
-                    continue;
-                case "deadline":
-                    wrapPrint(tasklist.addTask(new Deadline(parts)));
-                    continue;
-                case "event":
-                    wrapPrint(tasklist.addTask(new Event(parts)));
-                    continue;
-                default:
-            }
-            switch (input) {
-                case "bye":
-                    wrapPrint(bye);
-                    sc.close();
-                    return;
-                case "list":
-                    wrapPrint(tasklist.toString());
-                    break;
-                default:
-                    wrapPrint(tasklist.addTask(new Task(input)));
+            try {
+                switch (keyword) {
+                    case "mark":
+                        wrapPrint(tasklist.markTask(Integer.parseInt(parts[1]) - 1));
+                        continue;
+                    case "unmark":
+                        wrapPrint(tasklist.unmarkTask(Integer.parseInt(parts[1]) - 1));
+                        continue;
+                    case "todo":
+                        wrapPrint(tasklist.addTask(new ToDo(parts)));
+                        continue;
+                    case "deadline":
+                        wrapPrint(tasklist.addTask(new Deadline(parts)));
+                        continue;
+                    case "event":
+                        wrapPrint(tasklist.addTask(new Event(parts)));
+                        continue;
+                    default:
+                }
+                switch (input) {
+                    case "bye":
+                        wrapPrint(bye);
+                        sc.close();
+                        return;
+                    case "list":
+                        wrapPrint(tasklist.toString());
+                        break;
+                    default:
+                        throw PixelException.unknownInput();
+                }
+            } catch (PixelException e) {
+                wrapPrint(e.getMessage());
             }
         }
     }

@@ -1,6 +1,6 @@
 public class Deadline extends Task {
     String dueBy;
-    private static String[] format(String[] comp) {
+    private static String[] format(String[] comp) throws PixelException {
         int idx = 1;
         StringBuilder desc = new StringBuilder();
         StringBuilder dueBy = new StringBuilder();
@@ -17,6 +17,11 @@ public class Deadline extends Task {
             dueBy.append(comp[idx]).append(" ");
             idx++;
         }
+        if (desc.toString().isEmpty()) {
+            throw new PixelException("Please include a description for the Deadline!");
+        } else if (dueBy.toString().isEmpty()) {
+            throw new PixelException("Please set a deadline using '/by' followed by a date/time!");
+        }
         return new String[] {desc.toString().strip(), dueBy.toString().strip()};
     }
 
@@ -24,7 +29,7 @@ public class Deadline extends Task {
         super(desc);
         this.dueBy = dueBy;
     }
-    public Deadline(String[] comp) {
+    public Deadline(String[] comp) throws PixelException {
         super(Deadline.format(comp)[0]);
         this.dueBy = Deadline.format(comp)[1];
     }
