@@ -18,7 +18,7 @@ public class Pixel {
             if (input.isEmpty()) {
                 break;
             }
-            String[] parts = input.split(" ");
+            String[] parts = input.split("\\s+");
             String keyword = parts[0];
             switch (keyword) {
                 case "mark":
@@ -26,6 +26,15 @@ public class Pixel {
                     continue;
                 case "unmark":
                     wrapPrint(tasklist.unmarkTask(Integer.parseInt(parts[1]) - 1));
+                    continue;
+                case "todo":
+                    wrapPrint(tasklist.addTask(new ToDo(parts)));
+                    continue;
+                case "deadline":
+                    wrapPrint(tasklist.addTask(new Deadline(parts)));
+                    continue;
+                case "event":
+                    wrapPrint(tasklist.addTask(new Event(parts)));
                     continue;
                 default:
             }
@@ -38,7 +47,7 @@ public class Pixel {
                     wrapPrint(tasklist.toString());
                     break;
                 default:
-                    wrapPrint(tasklist.addTask(input));
+                    wrapPrint(tasklist.addTask(new Task(input)));
             }
         }
     }

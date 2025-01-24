@@ -2,15 +2,15 @@ public class TaskList {
     private Task[] contents = new Task[100];
     private int count = 0;
 
-    protected String addTask(String taskDesc) {
-        this.contents[count] = new Task(taskDesc);
+    protected String addTask(Task task) {
+        this.contents[count] = task;
         this.count++;
-        return "added: " + taskDesc;
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list", task.toString(), this.count);
     }
 
     @Override
     public String toString() {
-        StringBuilder out = new StringBuilder();
+        StringBuilder out = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= this.count; i++) {
             String curr = i + ". " + this.contents[i-1] + "\n";
             out.append(curr);

@@ -18,6 +18,10 @@ public class Task {
         this.isDone = false;
     }
 
+    protected String getDesc() {
+        return this.desc;
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.desc;
