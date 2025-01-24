@@ -4,7 +4,7 @@ public class ToDo extends Task {
         for (int i = 1; i < comp.length; i++) {
             desc.append(comp[i]).append(" ");
         }
-        return desc.toString();
+        return desc.toString().strip();
     }
 
     public ToDo(String desc) {

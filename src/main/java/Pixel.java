@@ -1,10 +1,10 @@
 import java.util.Scanner;
 public class Pixel {
     private static void wrapPrint(String text) {
-        System.out.println("________________________________ \n"
-                + text + "\n________________________________ \n");
+        System.out.println("________________________________\n"
+                + text + "\n________________________________\n");
     }
-    static String greet = " Hello! I'm your personal assistant, Pixel \n"
+    static String greet = " Hello! I'm your personal assistant, Pixel\n"
             + " How may I assist you?";
     static String bye = " Goodbye. Hope to see you again soon!";
 

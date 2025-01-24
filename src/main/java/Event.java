@@ -28,7 +28,7 @@ public class Event extends Task {
             to.append(comp[idx]).append(" ");
             idx++;
         }
-        return new String[] {desc.toString(), from.toString(), to.toString()};
+        return new String[] {desc.toString().strip(), from.toString().strip(), to.toString().strip()};
     }
     public Event(String desc, String from, String to) {
         super(desc);

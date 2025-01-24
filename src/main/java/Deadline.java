@@ -17,7 +17,7 @@ public class Deadline extends Task {
             dueBy.append(comp[idx]).append(" ");
             idx++;
         }
-        return new String[] {desc.toString(), dueBy.toString()};
+        return new String[] {desc.toString().strip(), dueBy.toString().strip()};
     }
 
     public Deadline(String desc, String dueBy) {
