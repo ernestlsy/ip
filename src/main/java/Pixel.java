@@ -28,6 +28,9 @@ public class Pixel {
                     case "unmark":
                         wrapPrint(tasklist.unmarkTask(Integer.parseInt(parts[1]) - 1));
                         continue;
+                    case "delete":
+                        wrapPrint(tasklist.deleteTask(Integer.parseInt(parts[1]) - 1));
+                        continue;
                     case "todo":
                         wrapPrint(tasklist.addTask(new ToDo(parts)));
                         continue;
@@ -50,6 +53,8 @@ public class Pixel {
                     default:
                         throw PixelException.unknownInput();
                 }
+            } catch (NumberFormatException e) {
+                wrapPrint("Please input a valid task number!");
             } catch (PixelException e) {
                 wrapPrint(e.getMessage());
             }
