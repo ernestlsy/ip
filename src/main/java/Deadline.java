@@ -1,5 +1,23 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
-    String dueBy;
+    LocalDateTime dueBy;
+    private static LocalDateTime parseDateTime(String input) throws PixelException {
+        String[] comp = input.split(" ");
+        if (comp.length > 2) {
+            throw new PixelException("Please use the format YYYY-MM-DD HH:MM for the date and time!");
+        }
+        try {
+            if (comp.length == 1) {
+                return LocalDateTime.parse(comp[0] + "T00:00");
+            }
+            return LocalDateTime.parse(comp[0] + "T" + comp[1]);
+        } catch (DateTimeParseException e) {
+            throw new PixelException("Please use the format YYYY-MM-DD HH:MM for the date and time!");
+        }
+    }
     private static String[] format(String[] comp) throws PixelException {
         int idx = 1;
         StringBuilder desc = new StringBuilder();
@@ -25,17 +43,18 @@ public class Deadline extends Task {
         return new String[] {desc.toString().strip(), dueBy.toString().strip()};
     }
 
-    public Deadline(String desc, String dueBy) {
+    public Deadline(String desc, LocalDateTime dueBy) {
         super(desc);
         this.dueBy = dueBy;
     }
     public Deadline(String[] comp) throws PixelException {
         super(Deadline.format(comp)[0]);
-        this.dueBy = Deadline.format(comp)[1];
+        this.dueBy = parseDateTime(Deadline.format(comp)[1]);
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.dueBy);
+        return String.format("[D]%s (by: %s)", super.toString(),
+                this.dueBy.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")));
     }
 }

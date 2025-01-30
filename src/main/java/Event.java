@@ -1,6 +1,24 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
-    String from;
-    String to;
+    LocalDateTime from;
+    LocalDateTime to;
+    private static LocalDateTime parseDateTime(String input) throws PixelException {
+        String[] comp = input.split(" ");
+        if (comp.length > 2) {
+            throw new PixelException("Please use the format YYYY-MM-DD HH:MM for the date and time!");
+        }
+        try {
+            if (comp.length == 1) {
+                return LocalDateTime.parse(comp[0] + "T00:00");
+            }
+            return LocalDateTime.parse(comp[0] + "T" + comp[1]);
+        } catch (DateTimeParseException e) {
+            throw new PixelException("Please use the format YYYY-MM-DD HH:MM for the date and time!");
+        }
+    }
     private static String[] format(String[] comp) throws PixelException {
         int idx = 1;
         StringBuilder desc = new StringBuilder();
@@ -37,7 +55,7 @@ public class Event extends Task {
         }
         return new String[] {desc.toString().strip(), from.toString().strip(), to.toString().strip()};
     }
-    public Event(String desc, String from, String to) {
+    public Event(String desc, LocalDateTime from, LocalDateTime to) {
         super(desc);
         this.from = from;
         this.to = to;
@@ -45,12 +63,14 @@ public class Event extends Task {
     public Event(String[] comp) throws PixelException {
         super(Event.format(comp)[0]);
         String[] temp = Event.format(comp);
-        this.from = temp[1];
-        this.to = temp[2];
+        this.from = parseDateTime(temp[1]);
+        this.to = parseDateTime(temp[2]);
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from, this.to);
+        return String.format("[E]%s (from: %s to: %s)", super.toString(),
+                this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")),
+                this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")));
     }
 }
