@@ -1,63 +1,32 @@
-import java.util.Scanner;
 public class Pixel {
-    private static void wrapPrint(String text) {
-        System.out.println("________________________________\n"
-                + text + "\n________________________________\n");
+    TaskList taskList;
+    Ui ui;
+    Storage storage;
+    public Pixel() {
+        this.storage = new Storage();
+        this.taskList = new TaskList();
+        this.ui = new Ui();
     }
-    static String greet = " Hello! I'm your personal assistant, Pixel\n"
-            + " How may I assist you?";
-    static String bye = " Goodbye. Hope to see you again soon!";
-
-    public static void main(String[] args) {
-        TaskList tasklist = new TaskList();
-        Scanner sc = new Scanner(System.in);
-
-        wrapPrint(greet);
-        while (true) {
-            String input = sc.nextLine();
-            if (input.isEmpty()) {
-                break;
-            }
-            String[] parts = input.split("\\s+");
-            String keyword = parts[0];
+    private void run() {
+        try {
+            this.storage.load(this.taskList);
+        } catch (PixelException e) {
+            this.ui.exceptionResponse(e);
+        }
+        boolean isExit = false;
+        this.ui.greet();
+        while (!isExit) {
             try {
-                switch (keyword) {
-                    case "mark":
-                        wrapPrint(tasklist.markTask(Integer.parseInt(parts[1]) - 1));
-                        continue;
-                    case "unmark":
-                        wrapPrint(tasklist.unmarkTask(Integer.parseInt(parts[1]) - 1));
-                        continue;
-                    case "delete":
-                        wrapPrint(tasklist.deleteTask(Integer.parseInt(parts[1]) - 1));
-                        continue;
-                    case "todo":
-                        wrapPrint(tasklist.addTask(new ToDo(parts)));
-                        continue;
-                    case "deadline":
-                        wrapPrint(tasklist.addTask(new Deadline(parts)));
-                        continue;
-                    case "event":
-                        wrapPrint(tasklist.addTask(new Event(parts)));
-                        continue;
-                    default:
-                }
-                switch (input) {
-                    case "bye":
-                        wrapPrint(bye);
-                        sc.close();
-                        return;
-                    case "list":
-                        wrapPrint(tasklist.toString());
-                        break;
-                    default:
-                        throw PixelException.unknownInput();
-                }
-            } catch (NumberFormatException e) {
-                wrapPrint("Please input a valid task number!");
+                String fullCommand = ui.read();
+                Command c = Parser.parseFullCommand(fullCommand);
+                c.execute(ui, taskList, storage);
+                isExit = c.isExit();
             } catch (PixelException e) {
-                wrapPrint(e.getMessage());
+                this.ui.exceptionResponse(e);
             }
         }
+    }
+    public static void main(String[] args) {
+        new Pixel().run();
     }
 }
