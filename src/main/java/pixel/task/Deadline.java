@@ -1,9 +1,10 @@
+package pixel.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    LocalDateTime dueBy;
+    private final LocalDateTime dueBy;
 
     public Deadline(String desc, LocalDateTime dueBy) {
         super(desc);

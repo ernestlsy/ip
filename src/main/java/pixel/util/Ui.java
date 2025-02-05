@@ -1,4 +1,8 @@
+package pixel.util;
+
 import java.util.Scanner;
+import pixel.task.TaskList;
+import pixel.task.Task;
 public class Ui {
     private Scanner sc;
     public Ui() {

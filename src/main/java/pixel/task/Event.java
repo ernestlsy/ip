@@ -1,10 +1,11 @@
+package pixel.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    LocalDateTime from;
-    LocalDateTime to;
+    private final LocalDateTime from;
+    private final LocalDateTime to;
 
     public Event(String desc, LocalDateTime from, LocalDateTime to) {
         super(desc);

@@ -1,6 +1,18 @@
+package pixel.command;
+
+import pixel.util.Storage;
+import pixel.util.Ui;
+import pixel.util.Parser;
+import pixel.util.PixelException;
+import pixel.task.TaskList;
+import pixel.task.TaskType;
+import pixel.task.ToDo;
+import pixel.task.Deadline;
+import pixel.task.Event;
+
 public class AddCommand extends Command {
-    private TaskType taskType;
-    private String[] args;
+    private final TaskType taskType;
+    private final String[] args;
     public AddCommand(TaskType taskType, String[] args) {
         this.taskType = taskType;
         this.args = args;

@@ -1,3 +1,5 @@
+package pixel.util;
+
 public class PixelException extends RuntimeException {
     public PixelException(String message) {
         super(message);

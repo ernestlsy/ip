@@ -1,3 +1,10 @@
+package pixel.command;
+
+import pixel.util.Storage;
+import pixel.util.Ui;
+import pixel.util.PixelException;
+import pixel.task.TaskList;
+
 public class UpdateCommand extends Command {
     private final boolean isCompleted;
     private final int taskIndex;

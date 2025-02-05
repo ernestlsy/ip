@@ -1,7 +1,16 @@
+package pixel;
+
+import pixel.util.Storage;
+import pixel.util.Ui;
+import pixel.util.Parser;
+import pixel.util.PixelException;
+import pixel.task.TaskList;
+import pixel.command.Command;
+
 public class Pixel {
-    TaskList taskList;
-    Ui ui;
-    Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
+    private final Storage storage;
     public Pixel() {
         this.storage = new Storage();
         this.taskList = new TaskList();

@@ -1,16 +1,12 @@
+package pixel.task;
+
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import pixel.util.PixelException;
 
 public class TaskList {
-    private ArrayList<Task> contents = new ArrayList<>(100);
+    private final ArrayList<Task> contents = new ArrayList<>(100);
     public int getListSize() {
         return this.contents.size();
-    }
-    protected Task addTask(Task task) {
-        this.contents.add(task);
-        return task;
     }
 
     @Override
@@ -23,14 +19,19 @@ public class TaskList {
         return out.toString();
     }
 
-    protected Task markTask(int idx) throws PixelException {
+    public Task addTask(Task task) {
+        this.contents.add(task);
+        return task;
+    }
+
+    public Task markTask(int idx) throws PixelException {
         if (idx < 0 || idx >= this.contents.size() || this.contents.get(idx) == null) {
             throw new PixelException("Please input a valid task number!");
         }
         this.contents.get(idx).markTask();
         return this.contents.get(idx);
     }
-    protected Task unmarkTask(int idx) throws PixelException {
+    public Task unmarkTask(int idx) throws PixelException {
         if (idx < 0 || idx >= this.contents.size() || this.contents.get(idx) == null) {
             throw new PixelException("Please input a valid task number!");
         }
@@ -38,7 +39,7 @@ public class TaskList {
         return this.contents.get(idx);
     }
 
-    protected Task deleteTask(int idx) throws PixelException {
+    public Task deleteTask(int idx) throws PixelException {
         if (idx < 0 || idx >= this.contents.size() || this.contents.get(idx) == null) {
             throw new PixelException("Please input a valid task number!");
         }

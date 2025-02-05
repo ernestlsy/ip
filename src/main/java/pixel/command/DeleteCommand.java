@@ -1,4 +1,9 @@
-import javax.swing.text.DefaultEditorKit;
+package pixel.command;
+
+import pixel.util.Storage;
+import pixel.util.Ui;
+import pixel.util.PixelException;
+import pixel.task.TaskList;
 
 public class DeleteCommand extends Command {
     private final int taskIndex;

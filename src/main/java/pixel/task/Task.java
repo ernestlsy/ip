@@ -1,3 +1,5 @@
+package pixel.task;
+
 abstract public class Task {
     protected String desc;
     protected boolean isDone;
@@ -15,16 +17,13 @@ abstract public class Task {
         return this.isDone ? "[X]" : "[ ]";
     }
 
-    protected void markTask() {
+    public void markTask() {
         this.isDone = true;
     }
-    protected void unmarkTask() {
+    public void unmarkTask() {
         this.isDone = false;
     }
 
-    protected String getDesc() {
-        return this.desc;
-    }
 
     @Override
     public String toString() {
