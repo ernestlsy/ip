@@ -46,6 +46,16 @@ public class TaskList {
         return this.contents.remove(idx);
     }
 
+    public ArrayList<Task> searchTask(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : this.contents) {
+            if (task.desc.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public String toFileFormat() {
         StringBuilder out = new StringBuilder();
         for (int i = 1; i <= this.contents.size(); i++) {
