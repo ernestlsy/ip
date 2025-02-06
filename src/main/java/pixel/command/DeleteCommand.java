@@ -5,11 +5,27 @@ import pixel.util.Ui;
 import pixel.util.PixelException;
 import pixel.task.TaskList;
 
+/**
+ * Represents a deletion Command consisting of the integer index of the task to be deleted.
+ * On execution, deletes the task corresponding to the index from the TaskList,
+ * and triggers a Ui response to be displayed.
+ * TaskList contents are saved to storage on execution.
+ */
 public class DeleteCommand extends Command {
     private final int taskIndex;
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
+
+    /**
+     * Deletes the Task stored at the provided taskIndex in the TaskList.
+     * Ui response is triggered and TaskList contents are saved to storage after successful task deletion.
+     *
+     * @param ui Ui object for this instance of Pixel
+     * @param taskList TaskList storing the tasks
+     * @param storage Storage object handling disk storage for this instance of Pixel
+     * @throws PixelException If taskIndex provided does not correspond to a Task in the TaskList
+     */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
         ui.deleteResponse(taskList.deleteTask(this.taskIndex), taskList.getListSize());

@@ -10,6 +10,12 @@ import pixel.task.ToDo;
 import pixel.task.Deadline;
 import pixel.task.Event;
 
+/**
+ * Represents an addition Command consisting of a TaskType and arguments.
+ * On execution, adds a task of that TaskType with details from the arguments to the TaskList,
+ * and triggers a Ui response to be displayed.
+ * TaskList contents are saved to storage on execution.
+ */
 public class AddCommand extends Command {
     private final TaskType taskType;
     private final String[] args;
@@ -17,6 +23,17 @@ public class AddCommand extends Command {
         this.taskType = taskType;
         this.args = args;
     }
+
+    /**
+     * Parses the task details from the arguments using Parser, creates a Task of the provided TaskType,
+     * then adds the Task to the TaskList.
+     * Ui response is triggered and TaskList contents are saved to storage after successful task addition.
+     *
+     * @param ui Ui object for this instance of Pixel
+     * @param taskList TaskList storing the tasks
+     * @param storage Storage object handling disk storage for this instance of Pixel
+     * @throws PixelException If taskType is unrecognized, or task details corresponding to the taskType are missing.
+     */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
         String[] components;

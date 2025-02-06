@@ -2,6 +2,7 @@ package pixel.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
 import pixel.task.TaskType;
 import pixel.command.Command;
 import pixel.command.AddCommand;
@@ -10,7 +11,20 @@ import pixel.command.ListCommand;
 import pixel.command.DeleteCommand;
 import pixel.command.ExitCommand;
 
+/**
+ * Utility class which handles all functionality involving parsing input and formatting arguments.
+ */
 public class Parser {
+
+    /**
+     * Parses date and time from a String to a LocalDateTime object.
+     * Accepts date/time String with the format (YYYY-MM-DD HH-MM), or (YYYY-MM-DD).
+     * If time is not provided (latter format), time is assumed to be 00:00.
+     *
+     * @param input Date and time in String format
+     * @return LocalDateTime object corresponding to the input date time
+     * @throws PixelException If the input String does not conform to the accepted format
+     */
     public static LocalDateTime parseDateTime(String input) throws PixelException {
         String[] comp = input.split(" ");
         if (comp.length > 2) {
@@ -26,6 +40,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the components of the input command into the task details of a ToDo task,
+     * namely task description.
+     *
+     * @param commandComponents Components of the input command
+     * @return String array consisting of the task description
+     * @throws PixelException If the task details required for a ToDo task are missing or invalid
+     */
     public static String[] parseToDo(String[] commandComponents) throws PixelException {
         StringBuilder desc = new StringBuilder();
         for (int i = 1; i < commandComponents.length; i++) {
@@ -36,6 +58,15 @@ public class Parser {
         }
         return new String[] { desc.toString().strip() };
     }
+
+    /**
+     * Parses the components of the input command into the task details of a Deadline task,
+     * namely task description and deadline.
+     *
+     * @param commandComponents Components of the input command
+     * @return String array consisting of the task description
+     * @throws PixelException If the task details required for a Deadline task are missing or invalid
+     */
     public static String[] parseDeadline(String[] commandComponents) throws PixelException {
         int i = 1;
         StringBuilder desc = new StringBuilder();
@@ -60,6 +91,15 @@ public class Parser {
         }
         return new String[] { desc.toString().strip(), dueBy.toString().strip() };
     }
+
+    /**
+     * Parses the components of the input command into the task details of an Event task,
+     * namely task description, start date/time and end date/time.
+     *
+     * @param commandComponents Components of the input command
+     * @return String array consisting of the task description
+     * @throws PixelException If the task details required for an Event task are missing or invalid
+     */
     public static String[] parseEvent(String[] commandComponents) throws PixelException {
         int i = 1;
         StringBuilder desc = new StringBuilder();
@@ -96,6 +136,17 @@ public class Parser {
         }
         return new String[] { desc.toString().strip(), from.toString().strip(), to.toString().strip() };
     }
+
+    /**
+     * Parses the input command by splitting it into words, then checking the intended command type by checking
+     * the first word of the command.
+     * If the first word is a recognized keyword, a Command corresponding to the keyword is constructed and returned.
+     *
+     * @param input Input command read by the Ui class from standard input
+     * @return A Command corresponding to the keyword, if recognized
+     * @throws PixelException If the first word of the command is not a recognized keyword,
+     * or if a non-number is provided for mark and unmark commands
+     */
     public static Command parseFullCommand(String input) throws PixelException {
         String[] components = input.split("\\s+");
         String keyword = components[0];
@@ -118,7 +169,7 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(Integer.parseInt(components[1])-1);
             default:
-                throw PixelException.unknownInput();
+                throw new PixelException("Sorry, I'm not sure what that means...");
             }
         } catch (NumberFormatException e) {
             throw new PixelException("Please input a valid task number!");

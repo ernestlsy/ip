@@ -11,6 +11,9 @@ import pixel.task.ToDo;
 import pixel.task.Deadline;
 import pixel.task.Event;
 
+/**
+ * Utility class which handles loading and storing of TaskList contents to a file in hard disk.
+ */
 public class Storage {
     private final String filePath;
     public Storage() {
@@ -25,6 +28,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads contents from the file at designated filePath, parses them into task details,
+     * which are used to construct the respective Tasks, and then adds them to the TaskList
+     *
+     * @param taskList TaskList which will store the loaded Tasks
+     * @throws PixelException If file contents at designated filePath does not conform to recognized format
+     */
     public void load(TaskList taskList) throws PixelException {
         String keyword, desc, isDone, dueBy, from, to;
         try {
@@ -62,6 +72,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the contents of the TaskList into the file at the designated filePath
+     *
+     * @param taskList TaskList currently storing the Tasks
+     */
     public void save(TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(this.filePath);
