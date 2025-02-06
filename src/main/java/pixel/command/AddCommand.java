@@ -19,6 +19,7 @@ import pixel.task.Event;
 public class AddCommand extends Command {
     private final TaskType taskType;
     private final String[] args;
+
     public AddCommand(TaskType taskType, String[] args) {
         this.taskType = taskType;
         this.args = args;
@@ -29,9 +30,9 @@ public class AddCommand extends Command {
      * then adds the Task to the TaskList.
      * Ui response is triggered and TaskList contents are saved to storage after successful task addition.
      *
-     * @param ui Ui object for this instance of Pixel
+     * @param ui       Ui object for this instance of Pixel
      * @param taskList TaskList storing the tasks
-     * @param storage Storage object handling disk storage for this instance of Pixel
+     * @param storage  Storage object handling disk storage for this instance of Pixel
      * @throws PixelException If taskType is unrecognized, or task details corresponding to the taskType are missing.
      */
     @Override
@@ -44,16 +45,11 @@ public class AddCommand extends Command {
             break;
         case DEADLINE:
             components = Parser.parseDeadline(this.args);
-            ui.addResponse(taskList.addTask(new Deadline(components[0],
-                            Parser.parseDateTime(components[1]))),
-                    taskList.getListSize());
+            ui.addResponse(taskList.addTask(new Deadline(components[0], Parser.parseDateTime(components[1]))), taskList.getListSize());
             break;
         case EVENT:
             components = Parser.parseEvent(this.args);
-            ui.addResponse(taskList.addTask(new Event(components[0],
-                            Parser.parseDateTime(components[1]),
-                            Parser.parseDateTime(components[2]))),
-                    taskList.getListSize());
+            ui.addResponse(taskList.addTask(new Event(components[0], Parser.parseDateTime(components[1]), Parser.parseDateTime(components[2]))), taskList.getListSize());
             break;
         default:
             throw new PixelException("Please enter a valid task type!");

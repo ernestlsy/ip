@@ -9,14 +9,16 @@ import pixel.task.TaskList;
  * Represents the structure of a Command entered by the user, which performs a function when executed.
  */
 abstract public class Command {
-    protected boolean isExit = false;
+    protected boolean isExitCommand = false;
+
     abstract public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException;
+
     /**
      * Returns whether this Command is an ExitCommand
      *
-     * @return isExit boolean
+     * @return isExitCommand boolean
      */
-    public boolean isExit() {
-        return this.isExit;
+    public boolean isExitCommand() {
+        return this.isExitCommand;
     }
 }

@@ -12,6 +12,7 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
     }
+
     public Event(String desc, boolean isDone, LocalDateTime from, LocalDateTime to) {
         super(desc, isDone);
         this.from = from;

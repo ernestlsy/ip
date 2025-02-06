@@ -13,6 +13,7 @@ import pixel.task.TaskList;
  */
 public class DeleteCommand extends Command {
     private final int taskIndex;
+
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }

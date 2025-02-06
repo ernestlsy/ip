@@ -1,6 +1,7 @@
 package pixel.util;
 
 import java.util.Scanner;
+
 import pixel.task.TaskList;
 import pixel.task.Task;
 
@@ -9,10 +10,13 @@ import pixel.task.Task;
  */
 public class Ui {
     private Scanner sc;
+
     public Ui() {
         this.sc = new Scanner(System.in);
     }
+
     private static void wrapPrint(String text) {
+
         System.out.println("________________________________\n"
                 + text + "\n________________________________\n");
     }

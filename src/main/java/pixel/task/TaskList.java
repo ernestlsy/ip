@@ -1,6 +1,7 @@
 package pixel.task;
 
 import java.util.ArrayList;
+
 import pixel.util.PixelException;
 
 /**
@@ -22,7 +23,7 @@ public class TaskList {
     public String toString() {
         StringBuilder out = new StringBuilder();
         for (int i = 1; i <= this.contents.size(); i++) {
-            String curr = i + ". " + this.contents.get(i-1) + "\n";
+            String curr = i + ". " + this.contents.get(i - 1) + "\n";
             out.append(curr);
         }
         return out.toString();
@@ -91,7 +92,7 @@ public class TaskList {
     public String toFileFormat() {
         StringBuilder out = new StringBuilder();
         for (int i = 1; i <= this.contents.size(); i++) {
-            out.append(this.contents.get(i-1).toFileFormat());
+            out.append(this.contents.get(i - 1).toFileFormat());
             out.append("\n");
         }
         out.append("EOF");

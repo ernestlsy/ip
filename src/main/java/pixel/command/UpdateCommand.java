@@ -14,6 +14,7 @@ import pixel.task.TaskList;
 public class UpdateCommand extends Command {
     private final boolean isCompleted;
     private final int taskIndex;
+
     public UpdateCommand(boolean isCompleted, int taskIndex) {
         this.isCompleted = isCompleted;
         this.taskIndex = taskIndex;
@@ -24,9 +25,9 @@ public class UpdateCommand extends Command {
      * provided isCompleted boolean.
      * Ui response is triggered and TaskList contents are saved to storage after successful task update.
      *
-     * @param ui Ui object for this instance of Pixel
+     * @param ui       Ui object for this instance of Pixel
      * @param taskList TaskList storing the tasks
-     * @param storage Storage object handling disk storage for this instance of Pixel
+     * @param storage  Storage object handling disk storage for this instance of Pixel
      * @throws PixelException If taskIndex provided does not correspond to a Task in the TaskList
      */
     @Override
