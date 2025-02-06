@@ -6,10 +6,12 @@ import pixel.util.PixelException;
 import pixel.task.TaskList;
 
 abstract public class Command {
-    protected boolean isExit = false;
+    protected boolean isExitCommand = false;
+
     abstract public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException;
-    public boolean isExit() {
-        return this.isExit;
+
+    public boolean isExitCommand() {
+        return this.isExitCommand;
     }
 
 }

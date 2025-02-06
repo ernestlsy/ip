@@ -10,6 +10,7 @@ public class Deadline extends Task {
         super(desc);
         this.dueBy = dueBy;
     }
+
     public Deadline(String desc, boolean isDone, LocalDateTime dueBy) {
         super(desc, isDone);
         this.dueBy = dueBy;

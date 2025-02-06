@@ -8,6 +8,7 @@ abstract public class Task {
         this.desc = desc;
         this.isDone = false;
     }
+
     public Task(String desc, boolean isDone) {
         this.desc = desc;
         this.isDone = isDone;
@@ -20,6 +21,7 @@ abstract public class Task {
     public void markTask() {
         this.isDone = true;
     }
+
     public void unmarkTask() {
         this.isDone = false;
     }

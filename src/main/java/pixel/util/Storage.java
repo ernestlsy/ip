@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
+
 import pixel.task.TaskList;
 import pixel.task.ToDo;
 import pixel.task.Deadline;
@@ -13,6 +14,7 @@ import pixel.task.Event;
 
 public class Storage {
     private final String filePath;
+
     public Storage() {
         this.filePath = "./data/Pixel.txt";
         try {
