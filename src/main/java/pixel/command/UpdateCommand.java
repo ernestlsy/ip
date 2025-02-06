@@ -5,6 +5,12 @@ import pixel.util.Ui;
 import pixel.util.PixelException;
 import pixel.task.TaskList;
 
+/**
+ * Represents an update Command consisting of the integer index of the task and the updated completion status.
+ * On execution, updates the completion status of the task corresponding to the index in the TaskList,
+ * and triggers a Ui response to be displayed.
+ * TaskList contents are saved to storage on execution.
+ */
 public class UpdateCommand extends Command {
     private final boolean isCompleted;
     private final int taskIndex;
@@ -12,6 +18,17 @@ public class UpdateCommand extends Command {
         this.isCompleted = isCompleted;
         this.taskIndex = taskIndex;
     }
+
+    /**
+     * Updates the isDone boolean of the Task stored at the provided taskIndex in the TaskList to the
+     * provided isCompleted boolean.
+     * Ui response is triggered and TaskList contents are saved to storage after successful task update.
+     *
+     * @param ui Ui object for this instance of Pixel
+     * @param taskList TaskList storing the tasks
+     * @param storage Storage object handling disk storage for this instance of Pixel
+     * @throws PixelException If taskIndex provided does not correspond to a Task in the TaskList
+     */
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
         if (isCompleted) {
