@@ -1,5 +1,6 @@
 package pixel.util;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import pixel.task.TaskList;
@@ -16,7 +17,6 @@ public class Ui {
     }
 
     private static void wrapPrint(String text) {
-
         System.out.println("________________________________\n"
                 + text + "\n________________________________\n");
     }
@@ -97,6 +97,19 @@ public class Ui {
      */
     public void listResponse(TaskList taskList) {
         Ui.wrapPrint("Here are the tasks in your list:\n" + taskList.toString());
+    }
+
+    public void searchResponse(ArrayList<Task> matchingTasks) {
+        if (!matchingTasks.isEmpty()) {
+            StringBuilder out = new StringBuilder();
+            for (int i = 1; i <= matchingTasks.size(); i++) {
+                String curr = i + ". " + matchingTasks.get(i - 1) + "\n";
+                out.append(curr);
+            }
+            Ui.wrapPrint("Here are the tasks matching your description:\n" + out.toString());
+        } else {
+            Ui.wrapPrint("There are no tasks matching your description.");
+        }
     }
 
     /**

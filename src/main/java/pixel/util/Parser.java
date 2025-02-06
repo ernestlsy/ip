@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import pixel.task.TaskType;
+import pixel.command.SearchCommand;
 import pixel.command.Command;
 import pixel.command.AddCommand;
 import pixel.command.UpdateCommand;
@@ -145,7 +146,7 @@ public class Parser {
      * @param input Input command read by the Ui class from standard input
      * @return A Command corresponding to the keyword, if recognized
      * @throws PixelException If the first word of the command is not a recognized keyword,
-     * or if a non-number is provided for mark and unmark commands
+     *                        or if a non-number is provided for mark and unmark commands
      */
     public static Command parseFullCommand(String input) throws PixelException {
         String[] components = input.split("\\s+");
@@ -160,6 +161,7 @@ public class Parser {
                 case "mark" -> new UpdateCommand(true, Integer.parseInt(components[1]) - 1);
                 case "unmark" -> new UpdateCommand(false, Integer.parseInt(components[1]) - 1);
                 case "delete" -> new DeleteCommand(Integer.parseInt(components[1]) - 1);
+                case "find" -> new SearchCommand(input.substring(5));
                 default -> throw new PixelException("Sorry, I'm not sure what that means...");
             };
         } catch (NumberFormatException e) {

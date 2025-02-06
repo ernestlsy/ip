@@ -84,6 +84,16 @@ public class TaskList {
         return this.contents.remove(idx);
     }
 
+    public ArrayList<Task> searchTask(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : this.contents) {
+            if (task.desc.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     /**
      * Returns the contents of the TaskList in a format compatible for writing to a file in disk.
      *
