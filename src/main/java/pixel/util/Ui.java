@@ -3,8 +3,8 @@ package pixel.util;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import pixel.task.TaskList;
 import pixel.task.Task;
+import pixel.task.TaskList;
 
 /**
  * Utility class which handles all functionality involving reading input from user and printing output.
@@ -58,7 +58,8 @@ public class Ui {
      * @param listSize Number of Tasks in the TaskList
      */
     public void addResponse(Task task, int listSize) {
-        Ui.wrapPrint(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list", task.toString(), listSize));
+        Ui.wrapPrint(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
+                task.toString(), listSize));
     }
 
     /**
@@ -86,7 +87,8 @@ public class Ui {
      * @param listSize Number of Tasks in the TaskList
      */
     public void deleteResponse(Task task, int listSize) {
-        Ui.wrapPrint(String.format("No problem, I've removed the task from the list:\n  %s\nNow you have %d tasks in the list", task.toString(), listSize));
+        Ui.wrapPrint(String.format("No problem, I've removed the task from the list:\n  "
+                + "%s\nNow you have %d tasks in the list", task.toString(), listSize));
     }
 
     /**

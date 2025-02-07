@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
-import pixel.task.TaskList;
-import pixel.task.ToDo;
 import pixel.task.Deadline;
 import pixel.task.Event;
+import pixel.task.TaskList;
+import pixel.task.ToDo;
 
 /**
  * Utility class which handles loading and storing of TaskList contents to a file in hard disk.
@@ -38,7 +38,12 @@ public class Storage {
      * @throws PixelException If file contents at designated filePath does not conform to recognized format
      */
     public void load(TaskList taskList) throws PixelException {
-        String keyword, desc, isDone, dueBy, from, to;
+        String keyword;
+        String desc;
+        String isDone;
+        String dueBy;
+        String from;
+        String to;
         try {
             File file = new File(this.filePath);
             Scanner sc = new Scanner(file);
@@ -61,7 +66,8 @@ public class Storage {
                     isDone = sc.nextLine();
                     from = sc.nextLine();
                     to = sc.nextLine();
-                    taskList.addTask(new Event(desc, Boolean.parseBoolean(isDone), LocalDateTime.parse(from), LocalDateTime.parse(to)));
+                    taskList.addTask(new Event(desc, Boolean.parseBoolean(isDone),
+                            LocalDateTime.parse(from), LocalDateTime.parse(to)));
                     continue;
                 case "EOF":
                     return;

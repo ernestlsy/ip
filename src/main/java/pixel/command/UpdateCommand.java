@@ -1,9 +1,9 @@
 package pixel.command;
 
+import pixel.task.TaskList;
+import pixel.util.PixelException;
 import pixel.util.Storage;
 import pixel.util.Ui;
-import pixel.util.PixelException;
-import pixel.task.TaskList;
 
 /**
  * Represents an update Command consisting of the integer index of the task and the updated completion status.

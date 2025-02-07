@@ -3,14 +3,14 @@ package pixel.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import pixel.task.TaskType;
-import pixel.command.SearchCommand;
-import pixel.command.Command;
 import pixel.command.AddCommand;
-import pixel.command.UpdateCommand;
-import pixel.command.ListCommand;
+import pixel.command.Command;
 import pixel.command.DeleteCommand;
 import pixel.command.ExitCommand;
+import pixel.command.ListCommand;
+import pixel.command.SearchCommand;
+import pixel.command.UpdateCommand;
+import pixel.task.TaskType;
 
 /**
  * Utility class which handles all functionality involving parsing input and formatting arguments.

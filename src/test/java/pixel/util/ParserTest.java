@@ -1,13 +1,15 @@
 package pixel.util;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.fail;
-import pixel.command.AddCommand;
-import pixel.command.UpdateCommand;
+
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.Test;
+
+import pixel.command.AddCommand;
+import pixel.command.UpdateCommand;
 
 public class ParserTest {
 
@@ -32,7 +34,7 @@ public class ParserTest {
             Parser.parseFullCommand("hello");
             fail();
         } catch (PixelException e) {
-            assertEquals(PixelException.unknownInput(), e);
+            assertEquals("Sorry, I'm not sure what that means...", e.getMessage());
         }
     }
 
