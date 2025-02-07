@@ -1,9 +1,9 @@
 package pixel.command;
 
+import pixel.task.TaskList;
+import pixel.util.PixelException;
 import pixel.util.Storage;
 import pixel.util.Ui;
-import pixel.util.PixelException;
-import pixel.task.TaskList;
 
 /**
  * Represents a deletion Command consisting of the integer index of the task to be deleted.

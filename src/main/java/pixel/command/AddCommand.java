@@ -1,14 +1,14 @@
 package pixel.command;
 
-import pixel.util.Storage;
-import pixel.util.Ui;
-import pixel.util.Parser;
-import pixel.util.PixelException;
+import pixel.task.Deadline;
+import pixel.task.Event;
 import pixel.task.TaskList;
 import pixel.task.TaskType;
 import pixel.task.ToDo;
-import pixel.task.Deadline;
-import pixel.task.Event;
+import pixel.util.Parser;
+import pixel.util.PixelException;
+import pixel.util.Storage;
+import pixel.util.Ui;
 
 /**
  * Represents an addition Command consisting of a TaskType and arguments.
@@ -45,11 +45,13 @@ public class AddCommand extends Command {
             break;
         case DEADLINE:
             components = Parser.parseDeadline(this.args);
-            ui.addResponse(taskList.addTask(new Deadline(components[0], Parser.parseDateTime(components[1]))), taskList.getListSize());
+            ui.addResponse(taskList.addTask(new Deadline(components[0], Parser.parseDateTime(components[1]))),
+                    taskList.getListSize());
             break;
         case EVENT:
             components = Parser.parseEvent(this.args);
-            ui.addResponse(taskList.addTask(new Event(components[0], Parser.parseDateTime(components[1]), Parser.parseDateTime(components[2]))), taskList.getListSize());
+            ui.addResponse(taskList.addTask(new Event(components[0], Parser.parseDateTime(components[1]),
+                    Parser.parseDateTime(components[2]))), taskList.getListSize());
             break;
         default:
             throw new PixelException("Please enter a valid task type!");

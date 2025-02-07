@@ -1,8 +1,8 @@
 package pixel.command;
 
+import pixel.task.TaskList;
 import pixel.util.Storage;
 import pixel.util.Ui;
-import pixel.task.TaskList;
 
 public class SearchCommand extends Command {
     private final String keyword;

@@ -1,11 +1,11 @@
 package pixel;
 
-import pixel.util.Storage;
-import pixel.util.Ui;
+import pixel.command.Command;
+import pixel.task.TaskList;
 import pixel.util.Parser;
 import pixel.util.PixelException;
-import pixel.task.TaskList;
-import pixel.command.Command;
+import pixel.util.Storage;
+import pixel.util.Ui;
 
 public class Pixel {
     private final TaskList taskList;

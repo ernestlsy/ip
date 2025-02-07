@@ -1,10 +1,13 @@
 package pixel.task;
 
-import org.junit.jupiter.api.Test;
-import pixel.util.PixelException;
-import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import pixel.util.PixelException;
 
 public class TaskListTest {
 
@@ -51,7 +54,8 @@ public class TaskListTest {
         // populated taskList
         taskList.addTask(new ToDo("cleanup", false));
         taskList.addTask(new Deadline("assignment", true, LocalDateTime.parse("2024-10-21T19:00")));
-        assertEquals("todo\ncleanup\nfalse\ndeadline\nassignment\ntrue\n2024-10-21T19:00\nEOF", taskList.toFileFormat());
+        assertEquals("todo\ncleanup\nfalse\ndeadline\nassignment\ntrue\n2024-10-21T19:00\nEOF",
+                taskList.toFileFormat());
     }
 
 }

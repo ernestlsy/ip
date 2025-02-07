@@ -1,8 +1,8 @@
 package pixel.command;
 
+import pixel.task.TaskList;
 import pixel.util.Storage;
 import pixel.util.Ui;
-import pixel.task.TaskList;
 
 /**
  * Represents a Command for displaying contents of the TaskList.

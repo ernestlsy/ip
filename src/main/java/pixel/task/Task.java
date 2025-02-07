@@ -3,7 +3,7 @@ package pixel.task;
 /**
  * Represents a Task to be completed by the user.
  */
-abstract public class Task {
+public abstract class Task {
     protected String desc;
     protected boolean isDone;
 
