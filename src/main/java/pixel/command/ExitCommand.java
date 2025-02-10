@@ -16,8 +16,7 @@ public class ExitCommand extends Command {
      * @param storage Storage object handling disk storage for this instance of Pixel
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        ui.exit();
-        this.isExitCommand = true;
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        return " Goodbye. Hope to see you again soon!";
     }
 }

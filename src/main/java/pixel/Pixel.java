@@ -18,27 +18,22 @@ public class Pixel {
         this.ui = new Ui();
     }
 
-    private void run() {
+    public String init() {
         try {
             this.storage.load(this.taskList);
         } catch (PixelException e) {
             this.ui.exceptionResponse(e);
         }
-        boolean isTerminated = false;
-        this.ui.greet();
-        while (!isTerminated) {
-            try {
-                String fullCommand = ui.read();
-                Command c = Parser.parseFullCommand(fullCommand);
-                c.execute(ui, taskList, storage);
-                isTerminated = c.isExitCommand();
-            } catch (PixelException e) {
-                this.ui.exceptionResponse(e);
-            }
+        return ui.greet();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parseFullCommand(input);
+            return c.execute(ui, taskList, storage);
+        } catch (PixelException e) {
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Pixel().run();
-    }
 }

@@ -31,12 +31,14 @@ public class UpdateCommand extends Command {
      * @throws PixelException If taskIndex provided does not correspond to a Task in the TaskList
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
+        String response;
         if (isCompleted) {
-            ui.markResponse(taskList.markTask(this.taskIndex));
+            response = ui.markResponse(taskList.markTask(this.taskIndex));
         } else {
-            ui.unmarkResponse(taskList.unmarkTask(this.taskIndex));
+            response = ui.unmarkResponse(taskList.unmarkTask(this.taskIndex));
         }
         storage.save(taskList);
+        return response;
     }
 }

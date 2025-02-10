@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param storage Storage object handling disk storage for this instance of Pixel
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        ui.listResponse(taskList);
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        return ui.listResponse(taskList);
     }
 }
