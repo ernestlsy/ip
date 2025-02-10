@@ -28,8 +28,9 @@ public class DeleteCommand extends Command {
      * @throws PixelException If taskIndex provided does not correspond to a Task in the TaskList
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
-        ui.deleteResponse(taskList.deleteTask(this.taskIndex), taskList.getListSize());
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
+        String response = ui.deleteResponse(taskList.deleteTask(this.taskIndex), taskList.getListSize());
         storage.save(taskList);
+        return response;
     }
 }

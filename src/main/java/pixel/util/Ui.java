@@ -39,16 +39,15 @@ public class Ui {
     /**
      * Prints greeting message.
      */
-    public void greet() {
-        Ui.wrapPrint(" Hello! I'm your personal assistant, Pixel\n" + " How may I assist you?");
+    public String greet() {
+       return " Hello! I'm your personal assistant, Pixel\n" + " How may I assist you?";
     }
 
     /**
      * Prints exit message, and closes Scanner.
      */
-    public void exit() {
-        Ui.wrapPrint(" Goodbye. Hope to see you again soon!");
-        this.sc.close();
+    public String exit() {
+        return " Goodbye. Hope to see you again soon!";
     }
 
     /**
@@ -57,9 +56,9 @@ public class Ui {
      * @param task Task added to the TaskList
      * @param listSize Number of Tasks in the TaskList
      */
-    public void addResponse(Task task, int listSize) {
-        Ui.wrapPrint(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
-                task.toString(), listSize));
+    public String addResponse(Task task, int listSize) {
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
+                task.toString(), listSize);
     }
 
     /**
@@ -67,8 +66,8 @@ public class Ui {
      *
      * @param task Task marked as complete in the TaskList
      */
-    public void markResponse(Task task) {
-        Ui.wrapPrint("Excellent, I've marked this task as done:\n  " + task.toString());
+    public String markResponse(Task task) {
+        return "Excellent, I've marked this task as done:\n  " + task.toString();
     }
 
     /**
@@ -76,8 +75,8 @@ public class Ui {
      *
      * @param task Task marked as incomplete in the TaskList
      */
-    public void unmarkResponse(Task task) {
-        Ui.wrapPrint("Alright, I've marked this task as not done yet:\n  " + task.toString());
+    public String unmarkResponse(Task task) {
+        return "Alright, I've marked this task as not done yet:\n  " + task.toString();
     }
 
     /**
@@ -86,9 +85,9 @@ public class Ui {
      * @param task Task deleted from the TaskList
      * @param listSize Number of Tasks in the TaskList
      */
-    public void deleteResponse(Task task, int listSize) {
-        Ui.wrapPrint(String.format("No problem, I've removed the task from the list:\n  "
-                + "%s\nNow you have %d tasks in the list", task.toString(), listSize));
+    public String deleteResponse(Task task, int listSize) {
+        return String.format("No problem, I've removed the task from the list:\n  "
+                + "%s\nNow you have %d tasks in the list", task.toString(), listSize);
     }
 
     /**
@@ -97,20 +96,20 @@ public class Ui {
      *
      * @param taskList TaskList storing the Tasks
      */
-    public void listResponse(TaskList taskList) {
-        Ui.wrapPrint("Here are the tasks in your list:\n" + taskList.toString());
+    public String listResponse(TaskList taskList) {
+        return "Here are the tasks in your list:\n" + taskList.toString();
     }
 
-    public void searchResponse(ArrayList<Task> matchingTasks) {
+    public String searchResponse(ArrayList<Task> matchingTasks) {
         if (!matchingTasks.isEmpty()) {
             StringBuilder out = new StringBuilder();
             for (int i = 1; i <= matchingTasks.size(); i++) {
                 String curr = i + ". " + matchingTasks.get(i - 1) + "\n";
                 out.append(curr);
             }
-            Ui.wrapPrint("Here are the tasks matching your description:\n" + out.toString());
+            return "Here are the tasks matching your description:\n" + out.toString();
         } else {
-            Ui.wrapPrint("There are no tasks matching your description.");
+            return "There are no tasks matching your description.";
         }
     }
 

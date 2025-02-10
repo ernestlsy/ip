@@ -11,7 +11,7 @@ import pixel.util.Ui;
 public abstract class Command {
     protected boolean isExitCommand = false;
 
-    public abstract void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException;
+    public abstract String execute(Ui ui, TaskList taskList, Storage storage) throws PixelException;
 
     /**
      * Returns whether this Command is an ExitCommand

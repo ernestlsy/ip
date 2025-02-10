@@ -36,26 +36,28 @@ public class AddCommand extends Command {
      * @throws PixelException If taskType is unrecognized, or task details corresponding to the taskType are missing.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
         String[] components;
+        String response;
         switch (this.taskType) {
         case TODO:
             components = Parser.parseToDo(this.args);
-            ui.addResponse(taskList.addTask(new ToDo(components[0])), taskList.getListSize());
+            response = ui.addResponse(taskList.addTask(new ToDo(components[0])), taskList.getListSize());
             break;
         case DEADLINE:
             components = Parser.parseDeadline(this.args);
-            ui.addResponse(taskList.addTask(new Deadline(components[0], Parser.parseDateTime(components[1]))),
+            response = ui.addResponse(taskList.addTask(new Deadline(components[0], Parser.parseDateTime(components[1]))),
                     taskList.getListSize());
             break;
         case EVENT:
             components = Parser.parseEvent(this.args);
-            ui.addResponse(taskList.addTask(new Event(components[0], Parser.parseDateTime(components[1]),
+            response = ui.addResponse(taskList.addTask(new Event(components[0], Parser.parseDateTime(components[1]),
                     Parser.parseDateTime(components[2]))), taskList.getListSize());
             break;
         default:
             throw new PixelException("Please enter a valid task type!");
         }
         storage.save(taskList);
+        return response;
     }
 }
