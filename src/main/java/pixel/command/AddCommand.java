@@ -30,28 +30,27 @@ public class AddCommand extends Command {
      * then adds the Task to the TaskList.
      * Ui response is triggered and TaskList contents are saved to storage after successful task addition.
      *
-     * @param ui       Ui object for this instance of Pixel
      * @param taskList TaskList storing the tasks
      * @param storage  Storage object handling disk storage for this instance of Pixel
      * @throws PixelException If taskType is unrecognized, or task details corresponding to the taskType are missing.
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
+    public String execute(TaskList taskList, Storage storage) throws PixelException {
         String[] components;
         String response;
         switch (this.taskType) {
         case TODO:
             components = Parser.parseToDo(this.args);
-            response = ui.addResponse(taskList.addTask(new ToDo(components[0])), taskList.getListSize());
+            response = Ui.addResponse(taskList.addTask(new ToDo(components[0])), taskList.getListSize());
             break;
         case DEADLINE:
             components = Parser.parseDeadline(this.args);
-            response = ui.addResponse(taskList.addTask(new Deadline(components[0], Parser.parseDateTime(components[1]))),
+            response = Ui.addResponse(taskList.addTask(new Deadline(components[0], Parser.parseDateTime(components[1]))),
                     taskList.getListSize());
             break;
         case EVENT:
             components = Parser.parseEvent(this.args);
-            response = ui.addResponse(taskList.addTask(new Event(components[0], Parser.parseDateTime(components[1]),
+            response = Ui.addResponse(taskList.addTask(new Event(components[0], Parser.parseDateTime(components[1]),
                     Parser.parseDateTime(components[2]))), taskList.getListSize());
             break;
         default:

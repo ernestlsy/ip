@@ -22,14 +22,13 @@ public class DeleteCommand extends Command {
      * Deletes the Task stored at the provided taskIndex in the TaskList.
      * Ui response is triggered and TaskList contents are saved to storage after successful task deletion.
      *
-     * @param ui Ui object for this instance of Pixel
      * @param taskList TaskList storing the tasks
      * @param storage Storage object handling disk storage for this instance of Pixel
      * @throws PixelException If taskIndex provided does not correspond to a Task in the TaskList
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
-        String response = ui.deleteResponse(taskList.deleteTask(this.taskIndex), taskList.getListSize());
+    public String execute(TaskList taskList, Storage storage) throws PixelException {
+        String response = Ui.deleteResponse(taskList.deleteTask(this.taskIndex), taskList.getListSize());
         storage.save(taskList);
         return response;
     }

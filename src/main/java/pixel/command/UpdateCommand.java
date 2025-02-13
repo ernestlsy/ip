@@ -25,18 +25,17 @@ public class UpdateCommand extends Command {
      * provided isCompleted boolean.
      * Ui response is triggered and TaskList contents are saved to storage after successful task update.
      *
-     * @param ui       Ui object for this instance of Pixel
      * @param taskList TaskList storing the tasks
      * @param storage  Storage object handling disk storage for this instance of Pixel
      * @throws PixelException If taskIndex provided does not correspond to a Task in the TaskList
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) throws PixelException {
+    public String execute(TaskList taskList, Storage storage) throws PixelException {
         String response;
         if (isCompleted) {
-            response = ui.markResponse(taskList.markTask(this.taskIndex));
+            response = Ui.markResponse(taskList.markTask(this.taskIndex));
         } else {
-            response = ui.unmarkResponse(taskList.unmarkTask(this.taskIndex));
+            response = Ui.unmarkResponse(taskList.unmarkTask(this.taskIndex));
         }
         storage.save(taskList);
         return response;

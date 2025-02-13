@@ -11,12 +11,11 @@ public class ListCommand extends Command {
     /**
      * Calls method from Ui class to print the contents of the TaskList.
      *
-     * @param ui Ui object for this instance of Pixel
      * @param taskList TaskList storing the tasks
      * @param storage Storage object handling disk storage for this instance of Pixel
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) {
-        return ui.listResponse(taskList);
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.listResponse(taskList);
     }
 }

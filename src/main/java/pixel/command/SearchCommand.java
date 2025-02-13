@@ -12,7 +12,7 @@ public class SearchCommand extends Command {
     }
 
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) {
-        return ui.searchResponse(taskList.searchTask(this.keyword));
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.searchResponse(taskList.searchTask(this.keyword));
     }
 }
