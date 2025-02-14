@@ -101,6 +101,43 @@ public class TaskList {
         return matchingTasks;
     }
 
+    public ArrayList<Task> clearMarked() {
+        ArrayList<Task> clearedTasks = new ArrayList<>();
+        for (int i = this.contents.size() - 1; i >= 0; i--) {
+            if (this.contents.get(i).isDone()) {
+                clearedTasks.add(this.contents.get(i));
+                this.contents.remove(i);
+            }
+        }
+        return clearedTasks;
+    }
+
+    public ArrayList<Task> markAll(int from, int to) {
+        ArrayList<Task> markedTasks = new ArrayList<>();
+        boolean indexOutOfRange = from < 0 || to >= this.contents.size();
+        if (indexOutOfRange) {
+            throw new PixelException("Please input a valid range of task numbers!");
+        }
+        for (int i = from; i <= to; i++) {
+            this.contents.get(i).markTask();
+            markedTasks.add(this.contents.get(i));
+        }
+        return markedTasks;
+    }
+
+    public ArrayList<Task> unmarkAll(int from, int to) {
+        ArrayList<Task> unmarkedTasks = new ArrayList<>();
+        boolean indexOutOfRange = from < 0 || to >= this.contents.size();
+        if (indexOutOfRange) {
+            throw new PixelException("Please input a valid range of task numbers!");
+        }
+        for (int i = from; i <= to; i++) {
+            this.contents.get(i).unmarkTask();
+            unmarkedTasks.add(this.contents.get(i));
+        }
+        return unmarkedTasks;
+    }
+
     /**
      * Returns the contents of the TaskList in a format compatible for writing to a file in disk.
      *

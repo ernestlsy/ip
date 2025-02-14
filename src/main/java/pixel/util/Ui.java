@@ -52,7 +52,7 @@ public class Ui {
      * @return String response indicating successful task deletion
      */
     public static String deleteResponse(Task task, int listSize) {
-        return String.format("No problem, I've removed the task from the list:\n  "
+        return String.format("No problem, I've removed the task from the list:\n"
                 + "%s\nNow you have %d tasks in the list", task.toString(), listSize);
     }
 
@@ -74,15 +74,45 @@ public class Ui {
      * @return String response containing details of all matching Tasks in the TaskList
      */
     public static String searchResponse(ArrayList<Task> matchingTasks) {
-        if (!matchingTasks.isEmpty()) {
-            StringBuilder out = new StringBuilder();
-            for (int i = 1; i <= matchingTasks.size(); i++) {
-                String curr = i + ". " + matchingTasks.get(i - 1) + "\n";
-                out.append(curr);
-            }
-            return "Here are the tasks matching your description:\n" + out.toString();
-        } else {
+        if (matchingTasks.isEmpty()) {
             return "There are no tasks matching your description.";
         }
+        StringBuilder out = new StringBuilder();
+        for (int i = 1; i <= matchingTasks.size(); i++) {
+            String curr = i + ". " + matchingTasks.get(i - 1) + "\n";
+            out.append(curr);
+        }
+        return "Here are the tasks matching your description:\n" + out.toString();
+    }
+
+    public static String clearResponse(ArrayList<Task> clearedTasks, int listSize) {
+        if (clearedTasks.isEmpty()) {
+            return "There are no completed tasks to remove!";
+        }
+        StringBuilder out = new StringBuilder();
+        for (int i = clearedTasks.size(); i > 0; i--) {
+            String curr = (clearedTasks.size() - i + 1) + ". " + clearedTasks.get(i - 1) + "\n";
+            out.append(curr);
+        }
+        return String.format("Well done! I've removed the following completed tasks:\n"
+                + "%s\nNow you have %d tasks in the list", out, listSize);
+    }
+
+    public static String markAllResponse(ArrayList<Task> markedTasks) {
+        StringBuilder out = new StringBuilder();
+        for (int i = 1; i <= markedTasks.size(); i++) {
+            String curr = i + ". " + markedTasks.get(i - 1) + "\n";
+            out.append(curr);
+        }
+        return "I've marked the following tasks as done:\n" + out;
+    }
+
+    public static String unmarkAllResponse(ArrayList<Task> unmarkedTasks) {
+        StringBuilder out = new StringBuilder();
+        for (int i = 1; i <= unmarkedTasks.size(); i++) {
+            String curr = i + ". " + unmarkedTasks.get(i - 1) + "\n";
+            out.append(curr);
+        }
+        return "I've marked the following tasks as not done:\n" + out;
     }
 }
