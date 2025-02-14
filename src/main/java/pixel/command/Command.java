@@ -3,7 +3,6 @@ package pixel.command;
 import pixel.task.TaskList;
 import pixel.util.PixelException;
 import pixel.util.Storage;
-import pixel.util.Ui;
 
 /**
  * Represents the structure of a Command entered by the user, which performs a function when executed.
