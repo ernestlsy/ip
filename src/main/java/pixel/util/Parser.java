@@ -31,8 +31,10 @@ public class Parser {
         if (comp.length > 2) {
             throw new PixelException("Please use the format YYYY-MM-DD HH:MM for the date and time!");
         }
+
         try {
             if (comp.length == 1) {
+                // If time not provided, it is assumed to be 00:00
                 return LocalDateTime.parse(comp[0] + "T00:00");
             }
             return LocalDateTime.parse(comp[0] + "T" + comp[1]);
@@ -51,13 +53,16 @@ public class Parser {
      */
     public static String[] parseToDo(String[] commandComponents) throws PixelException {
         StringBuilder desc = new StringBuilder();
+
         for (int i = 1; i < commandComponents.length; i++) {
             desc.append(commandComponents[i]).append(" ");
         }
+
         if (desc.toString().isEmpty()) {
             throw new PixelException("Please include a description for the ToDo!");
         }
-        return new String[]{desc.toString().strip()};
+
+        return new String[] { desc.toString().strip() };
     }
 
     /**
@@ -69,28 +74,25 @@ public class Parser {
      * @throws PixelException If the task details required for a Deadline task are missing or invalid
      */
     public static String[] parseDeadline(String[] commandComponents) throws PixelException {
-        int i = 1;
         StringBuilder desc = new StringBuilder();
         StringBuilder dueBy = new StringBuilder();
-        while (i < commandComponents.length) {
+        StringBuilder pointer = desc;
+
+        for (int i = 1; i < commandComponents.length; i++) {
             if (commandComponents[i].equals("/by")) {
-                i++;
-                break;
+                pointer = dueBy;
             } else {
-                desc.append(commandComponents[i]).append(" ");
-                i++;
+                pointer.append(commandComponents[i]).append(" ");
             }
         }
-        while (i < commandComponents.length) {
-            dueBy.append(commandComponents[i]).append(" ");
-            i++;
-        }
+
         if (desc.toString().isEmpty()) {
             throw new PixelException("Please include a description for the Deadline!");
         } else if (dueBy.toString().isEmpty()) {
             throw new PixelException("Please set a deadline using '/by' followed by a date/time!");
         }
-        return new String[]{desc.toString().strip(), dueBy.toString().strip()};
+
+        return new String[] { desc.toString().strip(), dueBy.toString().strip() };
     }
 
     /**
@@ -102,32 +104,21 @@ public class Parser {
      * @throws PixelException If the task details required for an Event task are missing or invalid
      */
     public static String[] parseEvent(String[] commandComponents) throws PixelException {
-        int i = 1;
         StringBuilder desc = new StringBuilder();
         StringBuilder from = new StringBuilder();
         StringBuilder to = new StringBuilder();
-        while (i < commandComponents.length) {
+        StringBuilder pointer = desc;
+
+        for (int i = 1; i < commandComponents.length; i++) {
             if (commandComponents[i].equals("/from")) {
-                i++;
-                break;
+                pointer = from;
+            } else if (commandComponents[i].equals("/to")) {
+                pointer = to;
             } else {
-                desc.append(commandComponents[i]).append(" ");
-                i++;
+                pointer.append(commandComponents[i]).append(" ");
             }
         }
-        while (i < commandComponents.length) {
-            if (commandComponents[i].equals("/to")) {
-                i++;
-                break;
-            } else {
-                from.append(commandComponents[i]).append(" ");
-                i++;
-            }
-        }
-        while (i < commandComponents.length) {
-            to.append(commandComponents[i]).append(" ");
-            i++;
-        }
+
         if (desc.toString().isEmpty()) {
             throw new PixelException("Please include a description for the Event!");
         } else if (from.toString().isEmpty()) {
@@ -135,7 +126,8 @@ public class Parser {
         } else if (to.toString().isEmpty()) {
             throw new PixelException("Please set a ending date/time using '/to' followed by a date/time!");
         }
-        return new String[]{desc.toString().strip(), from.toString().strip(), to.toString().strip()};
+
+        return new String[] { desc.toString().strip(), from.toString().strip(), to.toString().strip() };
     }
 
     /**

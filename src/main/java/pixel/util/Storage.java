@@ -41,9 +41,6 @@ public class Storage {
         String keyword;
         String desc;
         String isDone;
-        String dueBy;
-        String from;
-        String to;
         try {
             File file = new File(this.filePath);
             Scanner sc = new Scanner(file);
@@ -58,14 +55,14 @@ public class Storage {
                 case "deadline":
                     desc = sc.nextLine();
                     isDone = sc.nextLine();
-                    dueBy = sc.nextLine();
+                    String dueBy = sc.nextLine();
                     taskList.addTask(new Deadline(desc, Boolean.parseBoolean(isDone), LocalDateTime.parse(dueBy)));
                     continue;
                 case "event":
                     desc = sc.nextLine();
                     isDone = sc.nextLine();
-                    from = sc.nextLine();
-                    to = sc.nextLine();
+                    String from = sc.nextLine();
+                    String to = sc.nextLine();
                     taskList.addTask(new Event(desc, Boolean.parseBoolean(isDone),
                             LocalDateTime.parse(from), LocalDateTime.parse(to)));
                     continue;

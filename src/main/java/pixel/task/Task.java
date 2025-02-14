@@ -29,7 +29,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.desc;

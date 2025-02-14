@@ -48,7 +48,8 @@ public class TaskList {
      * @throws PixelException If the index provided does not correspond to a Task
      */
     public Task markTask(int idx) throws PixelException {
-        if (idx < 0 || idx >= this.contents.size() || this.contents.get(idx) == null) {
+        boolean indexOutOfRange = idx < 0 || idx >= this.contents.size();
+        if (indexOutOfRange || this.contents.get(idx) == null) {
             throw new PixelException("Please input a valid task number!");
         }
         this.contents.get(idx).markTask();
@@ -63,7 +64,8 @@ public class TaskList {
      * @throws PixelException If the index provided does not correspond to a Task
      */
     public Task unmarkTask(int idx) throws PixelException {
-        if (idx < 0 || idx >= this.contents.size() || this.contents.get(idx) == null) {
+        boolean indexOutOfRange = idx < 0 || idx >= this.contents.size();
+        if (indexOutOfRange || this.contents.get(idx) == null) {
             throw new PixelException("Please input a valid task number!");
         }
         this.contents.get(idx).unmarkTask();
@@ -78,7 +80,8 @@ public class TaskList {
      * @throws PixelException If the index provided does not correspond to a Task
      */
     public Task deleteTask(int idx) throws PixelException {
-        if (idx < 0 || idx >= this.contents.size() || this.contents.get(idx) == null) {
+        boolean indexOutOfRange = idx < 0 || idx >= this.contents.size();
+        if (indexOutOfRange || this.contents.get(idx) == null) {
             throw new PixelException("Please input a valid task number!");
         }
         return this.contents.remove(idx);
