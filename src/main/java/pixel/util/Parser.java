@@ -4,11 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 import pixel.command.AddCommand;
+import pixel.command.ClearCommand;
 import pixel.command.Command;
 import pixel.command.DeleteCommand;
 import pixel.command.ExitCommand;
 import pixel.command.ListCommand;
 import pixel.command.SearchCommand;
+import pixel.command.UpdateAllCommand;
 import pixel.command.UpdateCommand;
 import pixel.task.TaskType;
 
@@ -154,6 +156,11 @@ public class Parser {
                 case "unmark" -> new UpdateCommand(false, Integer.parseInt(components[1]) - 1);
                 case "delete" -> new DeleteCommand(Integer.parseInt(components[1]) - 1);
                 case "find" -> new SearchCommand(input.substring(5));
+                case "clear" -> new ClearCommand();
+                case "markAll" -> new UpdateAllCommand(true, Integer.parseInt(components[1]) - 1,
+                        Integer.parseInt(components[2]) - 1);
+                case "unmarkAll" -> new UpdateAllCommand(false, Integer.parseInt(components[1]) - 1,
+                        Integer.parseInt(components[2]) - 1);
                 default -> throw new PixelException("Sorry, I'm not sure what that means...");
             };
         } catch (NumberFormatException e) {
