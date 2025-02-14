@@ -36,7 +36,9 @@ public class TaskList {
      * @return The Task which was added
      */
     public Task addTask(Task task) {
+        int originalSize = this.contents.size();
         this.contents.add(task);
+        assert this.contents.size() == originalSize + 1 : "Size of taskList should have incremented by 1";
         return task;
     }
 
@@ -53,6 +55,7 @@ public class TaskList {
             throw new PixelException("Please input a valid task number!");
         }
         this.contents.get(idx).markTask();
+        assert this.contents.get(idx).isDone() : "Task should be marked as done";
         return this.contents.get(idx);
     }
 
@@ -69,6 +72,7 @@ public class TaskList {
             throw new PixelException("Please input a valid task number!");
         }
         this.contents.get(idx).unmarkTask();
+        assert !this.contents.get(idx).isDone() : "Task should be marked as not done";
         return this.contents.get(idx);
     }
 
